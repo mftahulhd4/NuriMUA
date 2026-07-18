@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebController;
+use App\Models\Costume;
 
-// Rute untuk halaman utama
-Route::get('/', [WebController::class, 'index']);
+Route::get('/', function () {
+    // Mengambil semua data kostum yang status 'is_available'-nya aktif (true)
+    $costumes = Costume::where('is_available', true)->get();
+    
+    // Mengirim data kostum ke halaman welcome
+    return view('welcome', compact('costumes'));
+});

@@ -38,9 +38,7 @@
             @forelse ($costumes as $costume)
                 <div class="bg-white rounded-lg shadow-md p-4">
                     <!-- FOTO DITAMPILKAN DI SINI (Jalur otomatis menyesuaikan Database) -->
-                    <img src="{{ asset('storage/' . $costume->image) }}" 
-                         alt="{{ $costume->name }}" 
-                         class="w-full h-80 object-cover rounded-lg bg-gray-200">
+                    <img src="{{ asset('storage/' . $costume->image) }}" alt="{{ $costume->name }}" class="w-full h-80 object-cover">
                     
                     <div class="mt-4">
                         <h4 class="text-lg font-semibold">{{ $costume->name }}</h4>

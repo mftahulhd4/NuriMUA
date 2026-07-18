@@ -5,7 +5,7 @@ namespace App\Filament\Resources\Costumes;
 use App\Filament\Resources\Costumes\CostumeResource\Pages;
 use App\Models\Costume;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema; 
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -13,15 +13,13 @@ use Filament\Tables\Table;
 class CostumeResource extends Resource
 {
     protected static ?string $model = Costume::class;
-
     protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-sparkles';
-    
     protected static ?string $navigationLabel = 'Koleksi Kostum';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([ 
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required()
@@ -32,9 +30,10 @@ class CostumeResource extends Resource
                     ->label('Nama Kostum'),
                 
                 Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('costumes')
-                    ->required(),
+    ->image()
+    ->disk('public') // INI TAMBAHANNYA
+    ->directory('costumes')
+    ->required(),
             ]);
     }
 
@@ -47,8 +46,7 @@ class CostumeResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')->label('Kategori'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // KITA KOSONGKAN SEMENTARA AGAR TIDAK ERROR
             ]);
     }
 
